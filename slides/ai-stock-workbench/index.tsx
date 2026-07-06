@@ -4,6 +4,7 @@ import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide
 import { useSlidePageNumber } from '@open-slide/core';
 
 import dashboard from './assets/dashboard.png';
+import homeDashboardLive from './assets/home-dashboard-live.jpg';
 
 const productFlowVideo = new URL('./assets/product-flow.mp4', import.meta.url).href;
 
@@ -199,11 +200,13 @@ const Screen = ({
   alt,
   style,
   className,
+  fit = 'cover',
 }: {
   src: string;
   alt: string;
   style?: CSSProperties;
   className?: string;
+  fit?: CSSProperties['objectFit'];
 }) => (
   <div
     className={className}
@@ -216,7 +219,7 @@ const Screen = ({
       ...style,
     }}
   >
-    <img src={src} alt={alt} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+    <img src={src} alt={alt} style={{ display: 'block', width: '100%', height: '100%', objectFit: fit }} />
   </div>
 );
 
@@ -529,7 +532,7 @@ const HomeDashboardFull: Page = () => (
           background: palette.surface,
         }}
       >
-        <img src={dashboard} alt="首頁持倉與監控儀表板" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={homeDashboardLive} alt="首頁持倉與監控儀表板" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'contain' }} />
       </div>
     </main>
     <Footer />
@@ -543,7 +546,7 @@ const HomeDashboardDetail: Page = () => (
         <Eyebrow>首頁拆解</Eyebrow>
         <PageTitle width={980}>首頁排版以「總覽卡片 → 活躍監控 → 下一步提示」由上到下收束。</PageTitle>
         <BodyText width={920}>這頁延續首頁截圖的比例與元件位置，只把閱讀焦點標出：上方三張指標卡、中段監控清單、底部操作提示。</BodyText>
-        <Screen src={dashboard} alt="首頁排版細節" style={{ height: 568, marginTop: 36, boxShadow: '0 24px 70px rgba(15,23,42,.12)' }} />
+        <Screen src={homeDashboardLive} alt="首頁排版細節" fit="contain" style={{ height: 568, marginTop: 36, boxShadow: '0 24px 70px rgba(15,23,42,.12)' }} />
       </div>
 
       <div style={{ display: 'grid', gap: 18, paddingTop: 94 }}>
