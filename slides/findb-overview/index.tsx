@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 
 const researchDatabaseVideo = new URL('./assets/research-database.mp4', import.meta.url).href;
@@ -447,43 +446,21 @@ const ResearchCapability = ({
   </div>
 );
 
-const ResearchDatabaseVideo = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const play = async () => {
-      try {
-        video.muted = true;
-        await video.play();
-      } catch {
-        // Browser autoplay policy may require manual playback.
-      }
-    };
-
-    void play();
-  }, []);
-
-  return (
-    <video
-      ref={videoRef}
-      src={researchDatabaseVideo}
-      controls
-      muted
-      playsInline
-      preload="metadata"
-      style={{
-        width: '100%',
-        height: '100%',
-        display: 'block',
-        objectFit: 'cover',
-        background: '#101418',
-      }}
-    />
-  );
-};
+const ResearchDatabaseVideo = () => (
+  <video
+    src={researchDatabaseVideo}
+    controls
+    playsInline
+    preload="metadata"
+    style={{
+      width: '100%',
+      height: '100%',
+      display: 'block',
+      objectFit: 'cover',
+      background: '#101418',
+    }}
+  />
+);
 
 const Cover: Page = () => (
   <Canvas>

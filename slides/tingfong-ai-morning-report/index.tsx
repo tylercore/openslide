@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 import { useSlidePageNumber } from '@open-slide/core';
 
@@ -457,42 +456,22 @@ const WatchGuide: Page = () => (
   </Canvas>
 );
 
-const ProductVideo = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const play = async () => {
-      try {
-        video.muted = true;
-        await video.play();
-      } catch {
-        // Browser autoplay policy may require the presenter to press play.
-      }
-    };
-    void play();
-  }, []);
-
-  return (
-    <video
-      ref={videoRef}
-      src={productVideo}
-      poster={pdfOpen}
-      controls
-      muted
-      playsInline
-      preload="metadata"
-      style={{
-        display: 'block',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        background: '#000',
-      }}
-    />
-  );
-};
+const ProductVideo = () => (
+  <video
+    src={productVideo}
+    poster={pdfOpen}
+    controls
+    playsInline
+    preload="metadata"
+    style={{
+      display: 'block',
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      background: '#000',
+    }}
+  />
+);
 
 const VideoPage: Page = () => (
   <Canvas tone="ink">
