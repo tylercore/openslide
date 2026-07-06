@@ -8,7 +8,7 @@ import pdfOpen from './assets/pdf-open.png';
 import platformList from './assets/platform-list.png';
 import podcastOpen from './assets/podcast-open.png';
 
-const productDemo = new URL('./assets/product-demo.mp4', import.meta.url).href;
+const productVideo = new URL('./assets/product-video.mp4', import.meta.url).href;
 
 export const design: DesignSystem = {
   palette: { bg: '#fbfaf7', text: '#111827', accent: '#ddae58' },
@@ -290,7 +290,7 @@ const Cover: Page = () => (
       }}
     />
     <div style={{ position: 'relative', padding: '150px 120px 0' }}>
-      <Eyebrow>產品影片輔助簡報</Eyebrow>
+      <Eyebrow>產品簡報</Eyebrow>
       <h1
         style={{
           fontFamily: 'var(--osd-font-display)',
@@ -304,9 +304,9 @@ const Cover: Page = () => (
       >
         廷豐每日 AI 晨報
       </h1>
-      <Body width={760}>在播放 Demo 前，先建立觀看框架：這不是 PDF viewer，而是把晨報變成可閱讀、可收聽、可追問的研究入口。</Body>
+      <Body width={760}>這不是單一 PDF viewer，而是把晨報變成可閱讀、可收聽、可追問的研究入口。</Body>
       <div style={{ display: 'flex', gap: 48, marginTop: 76 }}>
-        <Metric value="09:00" label="每日晨報節奏" />
+        <Metric value="8:30" label="每日晨報節奏" />
         <Metric value="8" label="市場主題整合" color={palette.green} />
         <Metric value="AI" label="Podcast 與洞察" color={palette.cyan} />
       </div>
@@ -318,7 +318,7 @@ const Cover: Page = () => (
 const Context: Page = () => (
   <Canvas>
     <div style={{ padding: '118px 120px 0', position: 'relative' }}>
-      <Eyebrow>播放前先回答：為什麼需要它？</Eyebrow>
+      <Eyebrow>問題設定</Eyebrow>
       <PageTitle width={1180}>研究內容的問題，不是資料太少，而是入口太分散。</PageTitle>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 28, marginTop: 78 }}>
         <PromptCard title="讀" text="PDF 有深度，但每天 100+ 頁不容易快速定位重點。" color={palette.accent} />
@@ -337,7 +337,7 @@ const Context: Page = () => (
           color: palette.ink,
         }}
       >
-        影片會展示功能；這份簡報只負責讓觀眾知道該看什麼、為什麼重要。
+        核心價值不是新增功能入口，而是讓研究材料在同一個脈絡中被吸收、查找與延伸。
       </div>
     </div>
     <Footer />
@@ -346,17 +346,38 @@ const Context: Page = () => (
 
 const Shift: Page = () => (
   <Canvas>
-    <div style={{ position: 'absolute', left: 120, top: 118, width: 700 }}>
+    <div
+      style={{
+        position: 'absolute',
+        left: 120,
+        right: 120,
+        top: 116,
+        textAlign: 'center',
+      }}
+    >
       <Eyebrow>產品定位</Eyebrow>
-      <PageTitle width={680}>從「一份 PDF」變成「一個研究起手式」。</PageTitle>
-      <Body width={650}>Demo 裡的 UI 動作可以拆成三個角色：內容入口、音訊摘要、上下文問答。它們共同降低每日研究的啟動成本。</Body>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <PageTitle width={980}>從「一份 PDF」變成「一個研究起手式」。</PageTitle>
+      </div>
+      <p
+        style={{
+          fontSize: 'var(--osd-size-body)',
+          lineHeight: 1.52,
+          maxWidth: 860,
+          color: palette.muted,
+          margin: '34px auto 0',
+          letterSpacing: 0,
+        }}
+      >
+        產品由三個等重角色組成：內容入口、音訊摘要、上下文問答，共同降低每日研究的啟動成本。
+      </p>
     </div>
-    <div style={{ position: 'absolute', right: 120, top: 140, width: 850 }}>
+    <div style={{ position: 'absolute', left: 120, right: 120, bottom: 162 }}>
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: 22,
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gap: 28,
         }}
       >
         {[
@@ -372,16 +393,17 @@ const Shift: Page = () => (
               background: palette.panel,
               border: `1px solid ${color}55`,
               borderRadius: 8,
-              padding: '34px 38px',
-              display: 'grid',
-              gridTemplateColumns: '220px 1fr',
+              padding: '42px 38px',
+              minHeight: 270,
+              display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
-              gap: 30,
-              minHeight: 142,
+              justifyContent: 'center',
+              textAlign: 'center',
             }}
           >
-            <div style={{ color, fontSize: 28, fontWeight: 900 }}>{title}</div>
-            <div style={{ color: palette.muted, fontSize: 30, lineHeight: 1.35 }}>{text}</div>
+            <div style={{ color, fontSize: 32, fontWeight: 900 }}>{title}</div>
+            <div style={{ color: palette.muted, fontSize: 28, lineHeight: 1.42, marginTop: 28 }}>{text}</div>
           </div>
         ))}
       </div>
@@ -391,10 +413,10 @@ const Shift: Page = () => (
 );
 
 const WatchGuide: Page = () => (
-  <Canvas tone="ink">
+  <Canvas>
     <div style={{ padding: '118px 120px 0', position: 'relative' }}>
-      <Eyebrow color={palette.accent}>觀看影片時，請看三件事</Eyebrow>
-      <PageTitle width={1220}>不要只看功能點，要看工作流如何被縮短。</PageTitle>
+      <Eyebrow>研究流程</Eyebrow>
+      <PageTitle width={1220}>把長報告轉成可讀、可聽、可追問的入口。</PageTitle>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 30, marginTop: 76 }}>
         {[
           ['01', '入口', '每日晨報列表把固定研究節奏變成固定入口。'],
@@ -405,25 +427,26 @@ const WatchGuide: Page = () => (
             key={num}
             style={{
               minHeight: 330,
-              border: '1px solid rgba(255,255,255,.16)',
+              border: `1px solid ${palette.faint}`,
               borderRadius: 8,
               padding: 38,
-              background: 'rgba(255,255,255,.06)',
+              background: palette.panel,
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
+              boxShadow: '0 22px 70px rgba(17,24,39,0.08)',
             }}
           >
             <div style={{ fontSize: 70, fontWeight: 950, color: palette.accent, lineHeight: 1 }}>{num}</div>
             <div>
-              <div style={{ fontSize: 38, fontWeight: 900, marginBottom: 18 }}>{title}</div>
-              <div style={{ fontSize: 28, lineHeight: 1.45, color: '#d1d5db' }}>{text}</div>
+              <div style={{ fontSize: 38, fontWeight: 900, marginBottom: 18, color: palette.text }}>{title}</div>
+              <div style={{ fontSize: 28, lineHeight: 1.45, color: palette.muted }}>{text}</div>
             </div>
           </div>
         ))}
       </div>
     </div>
-    <Footer label="播放前觀看框架" />
+    <Footer label="研究流程" />
   </Canvas>
 );
 
@@ -447,7 +470,7 @@ const ProductVideo = () => {
   return (
     <video
       ref={videoRef}
-      src={productDemo}
+      src={productVideo}
       poster={pdfOpen}
       controls
       muted
@@ -497,16 +520,16 @@ const VideoPage: Page = () => (
         fontWeight: 850,
       }}
     >
-      產品影片播放
+      產品流程
     </div>
-    <Footer label="Demo：讀、聽、問" />
+    <Footer label="讀、聽、問" />
   </Canvas>
 );
 
 const Evidence: Page = () => (
   <Canvas>
     <div style={{ padding: '112px 120px 0', position: 'relative' }}>
-      <Eyebrow>影片之後，把記憶點落在價值</Eyebrow>
+      <Eyebrow>價值落點</Eyebrow>
       <PageTitle width={1150}>三個畫面，對應三個可被銷售與交付的承諾。</PageTitle>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 24, marginTop: 58 }}>
         <Screen src={pdfOpen} alt="PDF 晨報開啟畫面" style={{ height: 260 }} />
@@ -537,32 +560,25 @@ const Close: Page = () => (
       alt="AI 助理回覆畫面"
       style={{
         position: 'absolute',
-        right: 120,
-        top: 150,
-        width: 780,
-        height: 490,
+        right: 118,
+        top: 166,
+        width: 790,
+        height: 520,
       }}
     />
-    <div style={{ position: 'absolute', left: 120, top: 145, width: 760 }}>
-      <Eyebrow>收束句</Eyebrow>
+    <div style={{ position: 'absolute', left: 120, top: 188, width: 760 }}>
+      <Eyebrow>結語</Eyebrow>
       <PageTitle width={720}>讀、聽、問，一份晨報完成專業研究起手式。</PageTitle>
-      <Body width={670}>影片讓觀眾看到操作；簡報最後要帶走的是定位：廷豐不是新增一個 AI 按鈕，而是把研究工作的第一步產品化。</Body>
+      <Body width={670}>最後要帶走的是定位：廷豐不是新增一個 AI 按鈕，而是把研究工作的第一步產品化。</Body>
       <div
         style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          marginTop: 64,
-          height: 64,
-          padding: '0 28px',
-          borderRadius: 8,
-          background: palette.text,
-          color: '#fffaf0',
-          fontSize: 26,
-          fontWeight: 850,
+          width: 520,
+          height: 4,
+          marginTop: 58,
+          borderRadius: 999,
+          background: `linear-gradient(90deg, ${palette.accent} 0%, ${palette.accent} 34%, ${palette.faint} 34%, ${palette.faint} 100%)`,
         }}
-      >
-        Product story + live demo support
-      </div>
+      />
     </div>
     <Footer />
   </Canvas>
@@ -601,4 +617,4 @@ export const meta: SlideMeta = {
   createdAt: '2026-07-06T13:16:23.461Z',
 };
 
-export default [Cover, Context, Shift, WatchGuide, VideoPage, Evidence, Close] satisfies Page[];
+export default [Cover, Context, Shift, WatchGuide, Evidence, VideoPage, Close] satisfies Page[];
