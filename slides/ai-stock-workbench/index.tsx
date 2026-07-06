@@ -4,7 +4,9 @@ import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide
 import { useSlidePageNumber } from '@open-slide/core';
 
 import dashboard from './assets/dashboard.png';
-import homeDashboardLive from './assets/home-dashboard-live.jpg';
+import researchPlatformRun from './assets/research-platform-run.png';
+import researchResultRun from './assets/research-result-run.png';
+import latestHomeDashboard from './assets/latestHomeDashboard.png';
 
 const productFlowVideo = new URL('./assets/product-flow.mp4', import.meta.url).href;
 
@@ -168,7 +170,7 @@ const BodyText = ({ children, width = 1040 }: { children: ReactNode; width?: num
   </p>
 );
 
-const Footer = ({ label = '廷豐 AI 股票交易工作台' }: { label?: string }) => {
+const Footer = () => {
   const { current, total } = useSlidePageNumber();
   return (
     <div
@@ -178,7 +180,7 @@ const Footer = ({ label = '廷豐 AI 股票交易工作台' }: { label?: string 
         right: 120,
         bottom: 48,
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         fontSize: 22,
         color: palette.muted,
@@ -187,7 +189,6 @@ const Footer = ({ label = '廷豐 AI 股票交易工作台' }: { label?: string 
         fontWeight: 650,
       }}
     >
-      <span>{label}</span>
       <span>
         {String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}
       </span>
@@ -404,6 +405,120 @@ const ResearchLayer = ({
   </div>
 );
 
+const ResearchFlowStep = ({
+  index,
+  title,
+  text,
+  color,
+}: {
+  index: string;
+  title: string;
+  text: string;
+  color: string;
+}) => (
+  <div
+    style={{
+      position: 'relative',
+      background: palette.surface,
+      border: `1px solid ${palette.border}`,
+      borderTop: `5px solid ${color}`,
+      borderRadius: 'var(--osd-radius)',
+      padding: '20px 22px 20px 82px',
+      minHeight: 112,
+      boxShadow: '0 18px 44px rgba(15,23,42,.08)',
+    }}
+  >
+    <div
+      style={{
+        position: 'absolute',
+        left: 22,
+        top: 20,
+        width: 44,
+        height: 44,
+        borderRadius: 6,
+        background: `${color}18`,
+        border: `1px solid ${color}55`,
+        color,
+        display: 'grid',
+        placeItems: 'center',
+        fontSize: 20,
+        fontWeight: 950,
+        fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+      }}
+    >
+      {index}
+    </div>
+    <div style={{ fontSize: 28, fontWeight: 950, color: palette.text }}>{title}</div>
+    <div style={{ fontSize: 21, lineHeight: 1.32, color: palette.muted, marginTop: 8 }}>{text}</div>
+  </div>
+);
+
+const FlowArrow = ({ color = palette.lineStrong }: { color?: string }) => (
+  <div
+    style={{
+      height: 24,
+      display: 'grid',
+      placeItems: 'center',
+      color,
+      fontSize: 26,
+      fontWeight: 950,
+      lineHeight: 1,
+    }}
+  >
+    ↓
+  </div>
+);
+
+const ResultStat = ({ label, value, color }: { label: string; value: string; color: string }) => (
+  <div
+    style={{
+      background: `${color}12`,
+      border: `1px solid ${color}40`,
+      borderRadius: 'var(--osd-radius)',
+      padding: '16px 18px',
+      minHeight: 88,
+    }}
+  >
+    <div style={{ fontSize: 19, color, fontWeight: 900 }}>{label}</div>
+    <div style={{ fontSize: 34, lineHeight: 1, color: palette.text, fontWeight: 950, marginTop: 10 }}>{value}</div>
+    <div style={{ fontSize: 17, color: palette.muted, marginTop: 6 }}>標的數</div>
+  </div>
+);
+
+const TopSymbolRow = ({ symbol, grade, score, samples }: { symbol: string; grade: string; score: string; samples: string }) => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: '96px 96px 1fr 96px',
+      alignItems: 'center',
+      gap: 16,
+      borderBottom: `1px solid ${palette.border}`,
+      padding: '10px 0',
+      fontSize: 20,
+      fontWeight: 850,
+    }}
+  >
+    <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', color: palette.text, fontWeight: 950 }}>
+      {symbol}
+    </div>
+    <div
+      style={{
+        justifySelf: 'start',
+        borderRadius: 6,
+        padding: '6px 12px',
+        color: palette.emerald,
+        background: palette.emeraldSoft,
+        fontSize: 16,
+        fontWeight: 950,
+      }}
+    >
+      {grade}
+    </div>
+    <div style={{ color: palette.muted }}>分數 {score}</div>
+    <div style={{ color: palette.muted, textAlign: 'right' }}>{samples}</div>
+  </div>
+);
+
 const ProductVideo = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -518,12 +633,16 @@ const ProductScope: Page = () => (
 
 const HomeDashboardFull: Page = () => (
   <Canvas>
-    <main style={{ position: 'relative', padding: '56px 88px 0' }}>
+    <main style={{ position: 'relative', padding: '74px 120px 0' }}>
+      <div style={{ position: 'relative', marginBottom: 28 }}>
+        <Eyebrow>主要介面</Eyebrow>
+        <PageTitle width={980}>持倉與監控儀表板</PageTitle>
+      </div>
       <div
         style={{
           position: 'relative',
-          width: 1610,
-          height: 906,
+          width: 1500,
+          aspectRatio: '1812 / 899',
           margin: '0 auto',
           borderRadius: 'var(--osd-radius)',
           overflow: 'hidden',
@@ -532,7 +651,7 @@ const HomeDashboardFull: Page = () => (
           background: palette.surface,
         }}
       >
-        <img src={homeDashboardLive} alt="首頁持倉與監控儀表板" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'contain' }} />
+        <img src={latestHomeDashboard} alt="首頁持倉與監控儀表板" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'contain' }} />
       </div>
     </main>
     <Footer />
@@ -541,18 +660,45 @@ const HomeDashboardFull: Page = () => (
 
 const HomeDashboardDetail: Page = () => (
   <Canvas>
-    <main style={{ position: 'relative', padding: '92px 120px 0', display: 'grid', gridTemplateColumns: '1010px 1fr', gap: 48 }}>
-      <div>
-        <Eyebrow>首頁拆解</Eyebrow>
-        <PageTitle width={980}>首頁排版以「總覽卡片 → 活躍監控 → 下一步提示」由上到下收束。</PageTitle>
-        <BodyText width={920}>這頁延續首頁截圖的比例與元件位置，只把閱讀焦點標出：上方三張指標卡、中段監控清單、底部操作提示。</BodyText>
-        <Screen src={homeDashboardLive} alt="首頁排版細節" fit="contain" style={{ height: 568, marginTop: 36, boxShadow: '0 24px 70px rgba(15,23,42,.12)' }} />
+    <main style={{ position: 'relative', padding: '104px 120px 0' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '980px 1fr', gap: 64, alignItems: 'end' }}>
+        <div>
+          <Eyebrow>首頁說明</Eyebrow>
+          <PageTitle width={980}>讓交易狀態先被看見，再進入下一步。</PageTitle>
+          <BodyText width={900}>首頁把資產水位、監控狀態與通知訊號放在同一個視野，讓使用者先掌握全局，再決定要深入哪一條流程。</BodyText>
+        </div>
+
+        <Screen
+          src={latestHomeDashboard}
+          alt="首頁狀態摘要"
+          fit="contain"
+          style={{
+            height: 304,
+            boxShadow: '0 20px 58px rgba(15,23,42,.12)',
+            background: palette.surfaceStrong,
+          }}
+        />
       </div>
 
-      <div style={{ display: 'grid', gap: 18, paddingTop: 94 }}>
-        <PositionCard label="01 / 資產總覽" value="18 張" hint="左側持倉總量、中央市值、右側監控數並列呈現。" />
-        <PositionCard label="02 / 監控清單" value="7 筆" hint="藍色頂線強調 Active Monitors，列內保留標的、策略、時段與狀態。" />
-        <PositionCard label="03 / 行動提示" value="下一步" hint="底部一句話導向先看資產水位與監控狀態，不打斷首頁節奏。" />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 26, marginTop: 62 }}>
+        <FeatureCard
+          title="資產水位"
+          text="持倉部位、持倉市值與監控數並列呈現，讓資產規模與市場曝險成為第一眼的判斷基準。"
+          color={palette.accent}
+          background={palette.blueSoft}
+        />
+        <FeatureCard
+          title="監控節奏"
+          text="Active Monitors 區塊把目前需要注意的狀態集中起來，讓監控中的標的與觸發訊號不散落在不同頁面。"
+          color={palette.black}
+          background={palette.slateSoft}
+        />
+        <FeatureCard
+          title="決策入口"
+          text="首頁只保留總覽與前往下一步的入口，讓下單、追蹤與通知流程各自回到更聚焦的工作區。"
+          color={palette.emerald}
+          background={palette.emeraldSoft}
+        />
       </div>
     </main>
     <Footer />
@@ -592,68 +738,88 @@ const VideoPage: Page = () => (
     >
       21 秒產品流程
     </div>
-    <Footer label="標準批次、TWAP、監控與通知" />
+    <Footer />
   </Canvas>
 );
 
 const AiRecommendation: Page = () => (
   <Canvas>
-    <main style={{ position: 'relative', padding: '104px 120px 0', display: 'grid', gridTemplateColumns: '520px 1fr', gap: 44 }}>
-      <div>
-        <Eyebrow>AI 智能推薦</Eyebrow>
-        <PageTitle width={520}>推薦不是一句話，而是一張可執行的標的分析卡。</PageTitle>
-        <BodyText width={500}>介面把候選標的、量能分布、BLV / CAR、建議用途、風險等級與監控時段放在同一頁，方便轉成提醒策略。</BodyText>
-        <div style={{ display: 'grid', gap: 14, marginTop: 44 }}>
-          <AiStockCard symbol="2383" name="台光電" type="ETF 驅動型 / PCB 股王" zone="後重型" active />
-          <AiStockCard symbol="3324" name="雙鴻" type="融資當沖型 / AI 散熱" zone="極端後重" />
-          <AiStockCard symbol="6669" name="緯穎" type="大單階梯型 / AI 伺服器" zone="極端後重" />
+    <main style={{ position: 'relative', padding: '76px 120px 0' }}>
+      <Eyebrow>AI 股票交易研究流程</Eyebrow>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: 64 }}>
+        <PageTitle width={980}>先把交易想法變成可重跑的研究規格，再把結果餵回策略。</PageTitle>
+        <div
+          style={{
+            width: 460,
+            color: palette.muted,
+            fontSize: 25,
+            lineHeight: 1.45,
+            fontWeight: 750,
+            paddingBottom: 6,
+          }}
+        >
+          研究平台以固定模板完成全市場掃描，讓交易候選池能被重複驗證。
         </div>
       </div>
 
-      <div
-        style={{
-          background: palette.surface,
-          border: `1px solid ${palette.border}`,
-          borderTop: `5px solid ${palette.black}`,
-          borderRadius: 'var(--osd-radius)',
-          padding: 36,
-          minHeight: 700,
-          boxShadow: '0 24px 70px rgba(15,23,42,.10)',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: 24 }}>
-          <div>
-            <div style={{ fontSize: 42, fontWeight: 950 }}>2383 台光電</div>
-            <div style={{ marginTop: 12, color: palette.muted, fontSize: 24, fontWeight: 850 }}>ETF 驅動型 / PCB 股王</div>
+      <div style={{ display: 'grid', gridTemplateColumns: '610px 1fr', gap: 54, marginTop: 34, alignItems: 'start' }}>
+        <div>
+          <ResearchFlowStep
+            index="01"
+            title="市場資料"
+            text="S3 Parquet 與台股 universe 先確認可讀，研究不直接依賴人工整理的截圖。"
+            color={palette.accent}
+          />
+          <FlowArrow color={palette.accent} />
+          <ResearchFlowStep
+            index="02"
+            title="研究技能"
+            text="平台技能與特性模板固定版本，讓同一套規則能被 agent 重複下載、驗證與執行。"
+            color={palette.emerald}
+          />
+          <FlowArrow color={palette.emerald} />
+          <ResearchFlowStep
+            index="03"
+            title="Research Spec"
+            text="交易假設寫成 JSON 規格，先過結構與語意驗證，再送出非同步研究執行。"
+            color={palette.amber}
+          />
+          <FlowArrow color={palette.amber} />
+          <ResearchFlowStep
+            index="04"
+            title="結果分級"
+            text="每個標的回傳分數、樣本數與 strong / moderate / weak 等級，成為 AI 推薦的依據。"
+            color={palette.black}
+          />
+        </div>
+
+        <div>
+          <Screen
+            src={researchPlatformRun}
+            alt="internal-research 平台首頁與 run 列表截圖"
+            fit="cover"
+            style={{ height: 420, borderTop: `5px solid ${palette.black}` }}
+          />
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 22 }}>
+            <ResearchMetric label="追蹤標的" value="985" />
+            <ResearchMetric label="研究模板" value="1.0.1" />
+            <ResearchMetric label="執行耗時" value="3 分 12 秒" />
           </div>
-          <Pill color={palette.accent}>後重型</Pill>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 14, marginTop: 36 }}>
-          <ResearchMetric label="BLV 後重比" value="約 45%" />
-          <ResearchMetric label="CAR 尾盤比" value="約 8-12%" />
-          <ResearchMetric label="驅動機制" value="ETF 被動再平衡" />
-          <ResearchMetric label="建議用途" value="VWAP 基準" />
-        </div>
-
-        <div
-          style={{
-            marginTop: 34,
-            borderLeft: `4px solid ${palette.accent}`,
-            background: palette.blueSoft,
-            padding: '28px 32px',
-            borderRadius: 'var(--osd-radius)',
-          }}
-        >
-          <div style={{ fontSize: 28, fontWeight: 950, color: palette.text }}>建議策略：VWAP 成交量加權</div>
-          <p style={{ fontSize: 27, lineHeight: 1.5, color: palette.text, margin: '18px 0 0' }}>
-            尾盤量能具規律性，若股價長時間站上 VWAP 且尾盤 A 段放量，適合用 VWAP 作為執行基準；集合競價若異常放大則降低追價權重。
-          </p>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, marginTop: 28 }}>
-          <ResearchMetric label="監控時段" value="12:30-13:25" />
-          <ResearchMetric label="風險等級" value="中" />
+          <div
+            style={{
+              marginTop: 20,
+              borderLeft: `5px solid ${palette.accent}`,
+              background: palette.blueSoft,
+              borderRadius: 'var(--osd-radius)',
+              padding: '22px 26px',
+              color: palette.text,
+              fontSize: 25,
+              lineHeight: 1.42,
+              fontWeight: 750,
+            }}
+          >
+            這一頁的重點是流程可追溯：資料源、技能版本、研究規格、執行紀錄與結果都在同一個工作台裡。
+          </div>
         </div>
       </div>
     </main>
@@ -663,29 +829,85 @@ const AiRecommendation: Page = () => (
 
 const ResearchPlatform: Page = () => (
   <Canvas>
-    <main style={{ position: 'relative', padding: '116px 120px 0', display: 'grid', gridTemplateColumns: '690px 1fr', gap: 88 }}>
-      <div>
-        <Eyebrow>internal-research</Eyebrow>
-        <PageTitle width={690}>AI 智能推薦背後，是一個研究規格與結果分級平台。</PageTitle>
-        <BodyText width={660}>internal-research 透過 S3 Parquet 資料、研究技能模板、Research Spec JSON 與執行紀錄，把「推薦」拆成可驗證的研究流程。</BodyText>
+    <main style={{ position: 'relative', padding: '92px 120px 0' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '650px 1fr', gap: 54, alignItems: 'start' }}>
+      <div
+        style={{
+          background: palette.surface,
+          border: `1px solid ${palette.border}`,
+          borderTop: `5px solid ${palette.black}`,
+          borderRadius: 'var(--osd-radius)',
+          padding: 30,
+          minHeight: 760,
+          boxShadow: '0 24px 70px rgba(15,23,42,.10)',
+        }}
+      >
+        <Eyebrow>研究成果</Eyebrow>
+        <h2
+          style={{
+            fontFamily: 'var(--osd-font-display)',
+            fontSize: 58,
+            lineHeight: 1.08,
+            fontWeight: 900,
+            margin: 0,
+            letterSpacing: 0,
+          }}
+        >
+          運行結果進行排行
+        </h2>
+        <p style={{ fontSize: 24, lineHeight: 1.4, color: palette.muted, margin: '18px 0 0', fontWeight: 650 }}>
+          將全市場標的分級，作為 AI 股票交易候選池
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 22 }}>
+          <ResultStat label="強" value="8" color={palette.emerald} />
+          <ResultStat label="中等" value="16" color={palette.accent} />
+          <ResultStat label="弱" value="23" color={palette.amber} />
+          <ResultStat label="無" value="108" color={palette.lineStrong} />
+        </div>
+
+        <div
+          style={{
+            marginTop: 18,
+            background: palette.surfaceStrong,
+            border: `1px solid ${palette.border}`,
+            borderRadius: 'var(--osd-radius)',
+            padding: '18px 24px 6px',
+          }}
+        >
+          <div style={{ display: 'grid', gridTemplateColumns: '96px 96px 1fr 96px', gap: 16, color: palette.muted, fontSize: 18, fontWeight: 900 }}>
+            <div>標的</div>
+            <div>等級</div>
+            <div>分數</div>
+            <div style={{ textAlign: 'right' }}>樣本</div>
+          </div>
+          <TopSymbolRow symbol="2207" grade="強" score="0.2886" samples="839" />
+          <TopSymbolRow symbol="1216" grade="強" score="0.2552" samples="840" />
+          <TopSymbolRow symbol="1235" grade="強" score="0.2017" samples="797" />
+        </div>
+
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 36, paddingTop: 12 }}>
-        <ResearchLayer
-          title="資料來源"
-          text="共享 S3 設定讀取市場資料 Parquet，主控台顯示連線狀態與可用資料集。"
-          color={palette.accent}
+      <div>
+        <Screen
+          src={researchResultRun}
+          alt="特性結果截圖"
+          fit="cover"
+          style={{ height: 558, borderTop: `5px solid ${palette.emerald}` }}
         />
-        <ResearchLayer
-          title="研究技能"
-          text="技能庫保存平台技能與特性模板，讓研究任務可重複、可下載、可版本化。"
-          color={palette.emerald}
-        />
-        <ResearchLayer
-          title="結果分級"
-          text="執行結果以 strong、moderate、weak、none、insufficient data 分級，回到標的推薦與風險提示。"
-          color={palette.amber}
-        />
+        <div
+          style={{
+            marginTop: 22,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 16,
+          }}
+        >
+          <FlowNode title="篩選" text="先取 strong / moderate 作為交易候選。" color={palette.emerald} />
+          <FlowNode title="解釋" text="用分數、樣本數與診斷資料確認可信度。" color={palette.accent} />
+          <FlowNode title="執行" text="回到工作台建立監控、TWAP 或批次下單。" color={palette.black} />
+        </div>
+      </div>
       </div>
     </main>
     <Footer />
