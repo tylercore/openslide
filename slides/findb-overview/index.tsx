@@ -1,4 +1,7 @@
+import { useEffect, useRef } from 'react';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
+
+const researchDatabaseVideo = new URL('./assets/research-database.mp4', import.meta.url).href;
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f2ea', text: '#182026', accent: '#0f766e' },
@@ -384,9 +387,107 @@ const NextStep = ({
   </div>
 );
 
+const ProductPillar = ({
+  label,
+  title,
+  text,
+  color,
+  background,
+}: {
+  label: string;
+  title: string;
+  text: string;
+  color: string;
+  background: string;
+}) => (
+  <div
+    style={{
+      background,
+      border: `1px solid ${color}55`,
+      borderRadius: 'var(--osd-radius)',
+      padding: 42,
+      minHeight: 430,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      boxShadow: '0 26px 60px rgba(31, 41, 55, 0.08)',
+    }}
+  >
+    <div>
+      <div style={{ fontSize: 24, fontWeight: 850, color, marginBottom: 22 }}>{label}</div>
+      <div style={{ fontSize: 48, lineHeight: 1.12, fontWeight: 900, color: palette.text }}>{title}</div>
+    </div>
+    <div style={{ fontSize: 29, lineHeight: 1.45, color: palette.muted }}>{text}</div>
+  </div>
+);
+
+const ResearchCapability = ({
+  title,
+  text,
+  color,
+}: {
+  title: string;
+  text: string;
+  color: string;
+}) => (
+  <div
+    style={{
+      background: '#ffffffb8',
+      borderRadius: 'var(--osd-radius)',
+      border: `1px solid ${color}55`,
+      padding: '30px 34px',
+      minHeight: 178,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+    }}
+  >
+    <div style={{ fontSize: 34, fontWeight: 900, color }}>{title}</div>
+    <div style={{ fontSize: 27, lineHeight: 1.42, color: palette.muted }}>{text}</div>
+  </div>
+);
+
+const ResearchDatabaseVideo = () => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const play = async () => {
+      try {
+        video.muted = true;
+        await video.play();
+      } catch {
+        // Browser autoplay policy may require manual playback.
+      }
+    };
+
+    void play();
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={researchDatabaseVideo}
+      controls
+      muted
+      playsInline
+      preload="metadata"
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'block',
+        objectFit: 'cover',
+        background: '#101418',
+      }}
+    />
+  );
+};
+
 const Cover: Page = () => (
-  <Canvas variant="ink">
-    <div style={{ position: 'absolute', inset: 0, opacity: 0.24 }}>
+  <Canvas>
+    <div style={{ position: 'absolute', inset: 0, opacity: 0.92 }}>
       <div
         style={{
           position: 'absolute',
@@ -395,7 +496,7 @@ const Cover: Page = () => (
           width: 620,
           height: 620,
           borderRadius: '50%',
-          border: '2px solid rgba(248,244,234,0.32)',
+          border: `2px solid ${palette.line}`,
         }}
       />
       <div
@@ -406,7 +507,7 @@ const Cover: Page = () => (
           width: 384,
           height: 384,
           borderRadius: '50%',
-          border: '2px solid rgba(248,244,234,0.28)',
+          border: `2px solid ${palette.goldSoft}`,
         }}
       />
       <div
@@ -417,13 +518,51 @@ const Cover: Page = () => (
           width: 160,
           height: 160,
           borderRadius: '50%',
-          background: 'rgba(15,118,110,0.55)',
+          background: palette.greenSoft,
+          border: `1px solid ${palette.accent}40`,
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          right: 214,
+          bottom: 152,
+          width: 520,
+          height: 132,
+          borderRadius: 'var(--osd-radius)',
+          background: '#ffffffaa',
+          border: `1px solid ${palette.line}`,
+          boxShadow: '0 22px 80px rgba(38,50,56,0.08)',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          right: 292,
+          bottom: 198,
+          width: 420,
+          height: 132,
+          borderRadius: 'var(--osd-radius)',
+          background: palette.goldSoft,
+          border: `1px solid ${palette.gold}30`,
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          right: 370,
+          bottom: 244,
+          width: 320,
+          height: 132,
+          borderRadius: 'var(--osd-radius)',
+          background: palette.blueSoft,
+          border: `1px solid ${palette.blue}30`,
         }}
       />
     </div>
 
     <div style={{ position: 'relative', padding: '138px 140px 0' }}>
-      <Eyebrow>Financial data platform</Eyebrow>
+      <Eyebrow>Financial intelligence platform</Eyebrow>
       <h1
         style={{
           fontFamily: 'var(--osd-font-display)',
@@ -437,15 +576,15 @@ const Cover: Page = () => (
       >
         FinDB
         <br />
-        可信任的金融資料底座
+        金融數據與研報資料庫
       </h1>
-      <p style={{ fontSize: 38, lineHeight: 1.42, color: '#dfe8df', maxWidth: 980, margin: '48px 0 0' }}>
-        將多來源市場資料整理成一致、可查、可追溯的資料服務，支援報告、圖表、研究與 AI 應用。
+      <p style={{ fontSize: 38, lineHeight: 1.42, color: palette.muted, maxWidth: 980, margin: '48px 0 0' }}>
+        一邊治理結構化市場數據，一邊沉澱非結構化券商研報，讓報告、圖表、研究與 AI 問答共享同一套可信資料語境。
       </p>
       <div style={{ display: 'flex', gap: 18, marginTop: 56 }}>
-        <Pill color="#8fd1c7">Source</Pill>
-        <Pill color="#e7c778">Normalize</Pill>
-        <Pill color="#93bce2">Serve</Pill>
+        <Pill color={palette.accent}>Data DB</Pill>
+        <Pill color={palette.gold}>Research DB</Pill>
+        <Pill color={palette.blue}>AI-ready</Pill>
       </div>
     </div>
   </Canvas>
@@ -464,7 +603,7 @@ const WhyItMatters: Page = () => (
         <SignalCard
           label="來源分散"
           title="同一市場，多種格式"
-          text="Bloomberg、區域市場、期貨與宏觀資料各自有不同命名與欄位。"
+          text="Bloomberg 與 Twelve Data 各自有不同命名、欄位與資料更新節奏。"
           color={palette.blue}
           background={palette.blueSoft}
         />
@@ -488,11 +627,41 @@ const WhyItMatters: Page = () => (
   </Canvas>
 );
 
+const PlatformShape: Page = () => (
+  <Canvas>
+    <main style={{ position: 'relative', padding: '112px 120px 0' }}>
+      <Eyebrow>Two databases, one FinDB</Eyebrow>
+      <PageTitle width={1320}>FinDB 由兩個互補資料庫組成：數據資料庫與研報資料庫。</PageTitle>
+      <BodyText width={1160}>
+        數據資料庫處理價格、標的、日曆與宏觀等結構化資料；研報資料庫處理 PDF / docx 報告、語意標籤、向量檢索與 RAG 問答。
+      </BodyText>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 34, marginTop: 64 }}>
+        <ProductPillar
+          label="01 / 數據資料庫"
+          title="標準化市場資料"
+          text="把多來源行情、公司行為、期貨與宏觀資料整理成 canonical data，提供 Serve API 給圖表、報告與 AI 使用。"
+          color={palette.accent}
+          background={palette.greenSoft}
+        />
+        <ProductPillar
+          label="02 / 研報資料庫"
+          title="可檢索的研究語料"
+          text="把約 1.5 萬份券商研報抽文字、標籤化、切塊嵌入，形成可搜尋、可追問、可回到原文的研究工作台。"
+          color={palette.gold}
+          background={palette.goldSoft}
+        />
+      </div>
+    </main>
+    <Footer />
+  </Canvas>
+);
+
 const HowItWorks: Page = () => (
   <Canvas>
     <main style={{ position: 'relative', padding: '118px 120px 0' }}>
-      <Eyebrow>How FinDB works</Eyebrow>
-      <PageTitle>FinDB 把資料處理拆成清楚的三段，降低彼此耦合。</PageTitle>
+      <Eyebrow>Data database pipeline</Eyebrow>
+      <PageTitle>數據資料庫把市場資料處理拆成清楚的三段，降低彼此耦合。</PageTitle>
       <BodyText width={1120}>
         抓資料的服務只負責傳送；主系統負責驗證、標準化與查詢。每一段都有明確責任，便於擴充市場與排查問題。
       </BodyText>
@@ -529,7 +698,7 @@ const HowItWorks: Page = () => (
 const Coverage: Page = () => (
   <Canvas>
     <main style={{ position: 'relative', padding: '118px 120px 0' }}>
-      <Eyebrow>Current coverage</Eyebrow>
+      <Eyebrow>Data database coverage</Eyebrow>
       <PageTitle width={1330}>目前已可服務多種資料需求，核心路徑已串接完成。</PageTitle>
       <BodyText width={1140}>
         Source、Serve、Admin 與 normalize 主流程已可運作，資料範圍從日頻行情延伸到公司行為、宏觀與期貨。
@@ -542,8 +711,8 @@ const Coverage: Page = () => (
           color={palette.accent}
         />
         <CoverageTile
-          title="Bloomberg direct ingest"
-          body="Crypto、FX、US stock、港中資料、macro 與 WTX 可直接匯入。"
+          title="Bloomberg / Twelve Data ingest"
+          body="Bloomberg 與 Twelve Data 來源已納入標準化流程，支援行情、外匯、宏觀與跨市場資料。"
           color={palette.blue}
         />
         <CoverageTile
@@ -562,14 +731,94 @@ const Coverage: Page = () => (
   </Canvas>
 );
 
+const ResearchDatabase: Page = () => (
+  <Canvas>
+    <main style={{ position: 'relative', padding: '112px 120px 0', display: 'grid', gridTemplateColumns: '670px 1fr', gap: 74 }}>
+      <div>
+        <Eyebrow tone="gold">Research database</Eyebrow>
+        <PageTitle width={650}>研報資料庫把非結構化報告，變成可問答的研究語料。</PageTitle>
+        <BodyText width={640}>
+          研報不只被保存，而是經過抽文字、語意標註、切塊嵌入與來源引用，讓使用者能搜尋、追問、打開原始 PDF，並生成深度研報。
+        </BodyText>
+        <div style={{ display: 'flex', gap: 16, marginTop: 48, flexWrap: 'wrap' }}>
+          <Pill color={palette.gold}>~1.5 萬份研報</Pill>
+          <Pill color={palette.blue}>pgvector</Pill>
+          <Pill>RAG 問答</Pill>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, paddingTop: 10 }}>
+        <ResearchCapability
+          title="語意檢索"
+          text="自然語言查詢，混合向量相似度與字面比對，依相關度與新近度排序。"
+          color={palette.blue}
+        />
+        <ResearchCapability
+          title="多維標籤"
+          text="Claude 讀報告內容，標出市場、商品類型、標的與研究屬性，並對齊 findb 市場代碼。"
+          color={palette.gold}
+        />
+        <ResearchCapability
+          title="帶引用問答"
+          text="RAG 回答以來源編號引用，可點回原始報告，保留研究判斷的證據鏈。"
+          color={palette.accent}
+        />
+        <ResearchCapability
+          title="深度研報"
+          text="當問答覆蓋足夠，一鍵生成含 KPI、圖表與來源清單的 PDF 深度研報。"
+          color={palette.red}
+        />
+      </div>
+    </main>
+    <Footer />
+  </Canvas>
+);
+
+const ResearchVideoPage: Page = () => (
+  <Canvas variant="ink">
+    <div style={{ position: 'absolute', left: 92, right: 92, top: 76, bottom: 102 }}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          borderRadius: 'var(--osd-radius)',
+          overflow: 'hidden',
+          border: '1px solid rgba(248,244,234,0.2)',
+          boxShadow: '0 34px 120px rgba(0,0,0,0.34)',
+          background: '#101418',
+        }}
+      >
+        <ResearchDatabaseVideo />
+      </div>
+    </div>
+    <div
+      style={{
+        position: 'absolute',
+        left: 128,
+        top: 112,
+        padding: '18px 24px',
+        borderRadius: 'var(--osd-radius)',
+        background: 'rgba(22,32,36,0.82)',
+        border: '1px solid rgba(248,244,234,0.16)',
+        color: '#f8f4ea',
+        fontSize: 26,
+        fontWeight: 850,
+      }}
+    >
+      研報資料庫使用教學
+    </div>
+    <Footer />
+  </Canvas>
+);
+
 const TrustModel: Page = () => (
   <Canvas>
     <main style={{ position: 'relative', padding: '118px 120px 0', display: 'grid', gridTemplateColumns: '720px 1fr', gap: 96 }}>
       <div>
         <Eyebrow>Governance model</Eyebrow>
-        <PageTitle width={720}>可信任，來自每一層都有留下痕跡。</PageTitle>
+        <PageTitle width={720}>可信任，來自每一層資料都有留下痕跡。</PageTitle>
         <BodyText width={690}>
-          FinDB 不只存結果，也保存來源、批次、品質檢查與人工修正紀錄。這讓資料問題可以被定位、重跑與審計。
+          數據資料庫保存 raw payload、批次與人工修正；研報資料庫保存 file_hash、標籤、切塊與引用來源。問題可以被定位、重跑與審計。
         </BodyText>
       </div>
 
@@ -599,15 +848,15 @@ const ValueForTeams: Page = () => (
   <Canvas>
     <main style={{ position: 'relative', padding: '118px 120px 0' }}>
       <Eyebrow>Business value</Eyebrow>
-      <PageTitle width={1250}>FinDB 讓資料團隊從反覆整理，轉向穩定供應。</PageTitle>
+      <PageTitle width={1250}>FinDB 讓研究團隊從反覆整理，轉向穩定供應與可追問。</PageTitle>
       <BodyText width={1110}>
-        同一份 canonical data 可以被不同消費者重用，減少每個應用各自整理資料、各自處理錯誤的成本。
+        結構化數據與非結構化研報進入同一套資料語境，減少每個應用各自整理資料、各自找來源、各自處理錯誤的成本。
       </BodyText>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 30, marginTop: 72 }}>
-        <Outcome title="主管與研究報告" text="使用一致的市場資料與宏觀資料，降低人工整理與口徑不一致。" color={palette.blue} />
+        <Outcome title="研究報告" text="降低多來源資料的不一致性，提高可信度。" color={palette.blue} />
         <Outcome title="圖表與工具頁" text="透過 Serve API 與 lookup cache 快速查標的、日 K、calendar 與 futures。" color={palette.accent} />
-        <Outcome title="AI / RAG 應用" text="提供可追溯、經正規化的資料來源，讓回答與引用更穩定。" color={palette.gold} />
+        <Outcome title="AI / RAG 應用" text="同時引用 canonical data 與原始研報片段，讓回答與證據鏈更穩定。" color={palette.gold} />
       </div>
 
       <div
@@ -622,7 +871,7 @@ const ValueForTeams: Page = () => (
           border: `1px solid ${palette.accent}40`,
         }}
       >
-        核心價值：把「每次要用資料都重新整理」變成「一次治理，多處使用」。
+        核心價值：把「每次要用資料與研報都重新整理」變成「一次治理，多處使用」。
       </div>
     </main>
     <Footer />
@@ -634,9 +883,9 @@ const NextRoadmap: Page = () => (
     <main style={{ position: 'relative', padding: '118px 120px 0', display: 'grid', gridTemplateColumns: '710px 1fr', gap: 90 }}>
       <div>
         <Eyebrow tone="gold">What comes next</Eyebrow>
-        <PageTitle width={700}>下一步重點是把已跑通的流程，升級成更穩的營運能力。</PageTitle>
+        <PageTitle width={700}>下一步重點是把兩個資料庫，升級成更穩的營運能力。</PageTitle>
         <BodyText width={690}>
-          現階段主流程已可展示與使用；後續投資應聚焦在大量資料、維運可觀測性與更多市場驗證。
+          現階段主流程已可展示與使用；後續投資應聚焦在大量資料、研報增量同步、維運可觀測性與更多市場驗證。
         </BodyText>
         <div style={{ display: 'flex', gap: 16, marginTop: 48, flexWrap: 'wrap' }}>
           <Pill>已交付主路徑</Pill>
@@ -648,13 +897,13 @@ const NextRoadmap: Page = () => (
         <NextStep
           phase="Priority 1"
           title="拆出 worker / queue"
-          text="避免大量 normalize 任務與 API process 互相影響，提升批次處理穩定度。"
+          text="避免大量 normalize、嵌入與研報生成任務和 API process 互相影響，提升批次穩定度。"
           color={palette.accent}
         />
         <NextStep
           phase="Priority 2"
-          title="補強效能與索引"
-          text="針對 bulk upsert、pagination 與查詢模式建立壓測基線。"
+          title="補強檢索與索引"
+          text="針對 market data 查詢、研報 hybrid search、pagination 與 RAG 來源排序建立壓測基線。"
           color={palette.blue}
         />
         <NextStep
@@ -670,8 +919,19 @@ const NextRoadmap: Page = () => (
 );
 
 export const meta: SlideMeta = {
-  title: 'FinDB Overview',
+  title: 'FinDB',
   createdAt: '2026-07-06T12:46:34.002Z',
 };
 
-export default [Cover, WhyItMatters, HowItWorks, Coverage, TrustModel, ValueForTeams, NextRoadmap] satisfies Page[];
+export default [
+  Cover,
+  WhyItMatters,
+  PlatformShape,
+  HowItWorks,
+  Coverage,
+  ResearchDatabase,
+  ResearchVideoPage,
+  TrustModel,
+  ValueForTeams,
+  NextRoadmap,
+] satisfies Page[];

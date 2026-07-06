@@ -5,6 +5,7 @@ import { useSlidePageNumber } from '@open-slide/core';
 import aiChatOpen from './assets/ai-chat-open.png';
 import aiContextMenu from './assets/ai-context-menu.png';
 import pdfOpen from './assets/pdf-open.png';
+import page20Chart from './assets/page-20-chart.png';
 import platformList from './assets/platform-list.png';
 import podcastOpen from './assets/podcast-open.png';
 
@@ -171,7 +172,15 @@ const Footer = ({ label = '廷豐金融科技晨報' }: { label?: string }) => {
   );
 };
 
-const PageTitle = ({ children, width = 1120 }: { children: React.ReactNode; width?: number }) => (
+const PageTitle = ({
+  children,
+  width = 1120,
+  nowrap = false,
+}: {
+  children: React.ReactNode;
+  width?: number;
+  nowrap?: boolean;
+}) => (
   <h2
     style={{
       fontFamily: 'var(--osd-font-display)',
@@ -181,6 +190,7 @@ const PageTitle = ({ children, width = 1120 }: { children: React.ReactNode; widt
       maxWidth: width,
       margin: 0,
       letterSpacing: 0,
+      whiteSpace: nowrap ? 'nowrap' : undefined,
     }}
   >
     {children}
@@ -294,17 +304,18 @@ const Cover: Page = () => (
       <h1
         style={{
           fontFamily: 'var(--osd-font-display)',
-          fontSize: 'var(--osd-size-hero)',
+          fontSize: 118,
           lineHeight: 1.04,
           fontWeight: 950,
-          maxWidth: 900,
+          maxWidth: 1080,
+          whiteSpace: 'nowrap',
           margin: 0,
           letterSpacing: 0,
         }}
       >
         廷豐每日 AI 晨報
       </h1>
-      <Body width={760}>這不是單一 PDF viewer，而是把晨報變成可閱讀、可收聽、可追問的研究入口。</Body>
+      <Body width={760}>這不是簡單的書面報告，而是把晨報變成可閱讀、可收聽、可追問的研究入口。</Body>
       <div style={{ display: 'flex', gap: 48, marginTop: 76 }}>
         <Metric value="8:30" label="每日晨報節奏" />
         <Metric value="8" label="市場主題整合" color={palette.green} />
@@ -318,12 +329,12 @@ const Cover: Page = () => (
 const Context: Page = () => (
   <Canvas>
     <div style={{ padding: '118px 120px 0', position: 'relative' }}>
-      <Eyebrow>問題設定</Eyebrow>
-      <PageTitle width={1180}>研究內容的問題，不是資料太少，而是入口太分散。</PageTitle>
+      <Eyebrow>需求定義</Eyebrow>
+      <PageTitle width={1180}>晨報的需求，不只是交付一份書面報告，而是讓研究能被讀、聽、問。</PageTitle>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 28, marginTop: 78 }}>
-        <PromptCard title="讀" text="PDF 有深度，但每天 100+ 頁不容易快速定位重點。" color={palette.accent} />
-        <PromptCard title="聽" text="通勤、開盤前與盤中追蹤，需要把內容轉成可吸收的音訊摘要。" color={palette.green} />
-        <PromptCard title="問" text="真正的工作流是針對段落追問，讓研究材料立刻變成判斷。" color={palette.cyan} />
+        <PromptCard title="讀" text="開盤前快速抓到市場主題與段落重點，保留完整研究脈絡。" color={palette.accent} />
+        <PromptCard title="聽" text="通勤與盤前準備時，把晨報轉成可持續吸收的音訊。" color={palette.green} />
+        <PromptCard title="問" text="針對原文段落追問，讓消息快速延伸成研究判斷。" color={palette.cyan} />
       </div>
       <div
         style={{
@@ -337,7 +348,7 @@ const Context: Page = () => (
           color: palette.ink,
         }}
       >
-        核心價值不是新增功能入口，而是讓研究材料在同一個脈絡中被吸收、查找與延伸。
+        需求定義：把每日晨報從一次性交付，變成固定、可延伸的研究入口。
       </div>
     </div>
     <Footer />
@@ -348,36 +359,32 @@ const Shift: Page = () => (
   <Canvas>
     <div
       style={{
-        position: 'absolute',
-        left: 120,
-        right: 120,
-        top: 116,
-        textAlign: 'center',
+        padding: '118px 120px 0',
+        position: 'relative',
       }}
     >
       <Eyebrow>產品定位</Eyebrow>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <PageTitle width={980}>從「一份 PDF」變成「一個研究起手式」。</PageTitle>
-      </div>
+      <PageTitle width={1680} nowrap>
+        從「一份 PDF」變成「一個消息的深入研究」
+      </PageTitle>
       <p
         style={{
           fontSize: 'var(--osd-size-body)',
           lineHeight: 1.52,
-          maxWidth: 860,
+          maxWidth: 980,
           color: palette.muted,
-          margin: '34px auto 0',
+          margin: '34px 0 0',
           letterSpacing: 0,
         }}
       >
         產品由三個等重角色組成：內容入口、音訊摘要、上下文問答，共同降低每日研究的啟動成本。
       </p>
-    </div>
-    <div style={{ position: 'absolute', left: 120, right: 120, bottom: 162 }}>
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr 1fr',
           gap: 28,
+          marginTop: 76,
         }}
       >
         {[
@@ -416,10 +423,10 @@ const WatchGuide: Page = () => (
   <Canvas>
     <div style={{ padding: '118px 120px 0', position: 'relative' }}>
       <Eyebrow>研究流程</Eyebrow>
-      <PageTitle width={1220}>把長報告轉成可讀、可聽、可追問的入口。</PageTitle>
+      <PageTitle width={1680}>把長報告轉成可讀、可聽、可追問的入口。</PageTitle>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 30, marginTop: 76 }}>
         {[
-          ['01', '入口', '每日晨報列表把固定研究節奏變成固定入口。'],
+          ['01', '入口', '把每日晨報變為固定研究入口。'],
           ['02', '承接', 'PDF、音訊與 AI 面板在同一個閱讀脈絡中出現。'],
           ['03', '提問', '從段落選取直接進入 AI 洞察，少掉複製與切換。'],
         ].map(([num, title, text]) => (
@@ -530,9 +537,13 @@ const Evidence: Page = () => (
   <Canvas>
     <div style={{ padding: '112px 120px 0', position: 'relative' }}>
       <Eyebrow>價值落點</Eyebrow>
-      <PageTitle width={1150}>三個畫面，對應三個可被銷售與交付的承諾。</PageTitle>
+      <PageTitle width={1220}>
+        三個功能
+        <br />
+        對應三個可被銷售與交付的承諾。
+      </PageTitle>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 24, marginTop: 58 }}>
-        <Screen src={pdfOpen} alt="PDF 晨報開啟畫面" style={{ height: 260 }} />
+        <Screen src={page20Chart} alt="PDF 第 20 頁圖表" style={{ height: 260 }} />
         <Screen src={podcastOpen} alt="Podcast 面板畫面" style={{ height: 260 }} />
         <Screen src={aiContextMenu} alt="AI 洞察右鍵選單畫面" style={{ height: 260 }} />
       </div>
@@ -540,7 +551,7 @@ const Evidence: Page = () => (
         {[
           ['內容深度', '105 頁晨報與 8 大市場，保留專業研究的完整性。', palette.accent],
           ['吸收效率', 'Podcast 把閱讀延伸到開盤前、通勤與盤中空檔。', palette.green],
-          ['判斷速度', 'AI 洞察讓問題留在原文脈絡裡，不需要切換工具。', palette.cyan],
+          ['回應速度', 'AI 洞察讓問題留在原文脈絡裡，不需要切換工具。', palette.cyan],
         ].map(([title, text, color]) => (
           <div key={title} style={{ borderTop: `4px solid ${color}`, paddingTop: 20 }}>
             <div style={{ fontSize: 32, fontWeight: 900, color }}>{title}</div>
@@ -568,7 +579,7 @@ const Close: Page = () => (
     />
     <div style={{ position: 'absolute', left: 120, top: 188, width: 760 }}>
       <Eyebrow>結語</Eyebrow>
-      <PageTitle width={720}>讀、聽、問，一份晨報完成專業研究起手式。</PageTitle>
+      <PageTitle width={720}>讀、聽、問，一份晨報成為專業研究的起點</PageTitle>
       <Body width={670}>最後要帶走的是定位：廷豐不是新增一個 AI 按鈕，而是把研究工作的第一步產品化。</Body>
       <div
         style={{
@@ -613,7 +624,7 @@ VideoPage.transition = {
 };
 
 export const meta: SlideMeta = {
-  title: '廷豐每日 AI 晨報',
+  title: '廷豐 AI 晨報',
   createdAt: '2026-07-06T13:16:23.461Z',
 };
 
