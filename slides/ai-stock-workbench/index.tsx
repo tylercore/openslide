@@ -143,7 +143,15 @@ const Eyebrow = ({
   </div>
 );
 
-const PageTitle = ({ children, width = 1180 }: { children: ReactNode; width?: number }) => (
+const PageTitle = ({
+  children,
+  width = 1180,
+  nowrap = false,
+}: {
+  children: ReactNode;
+  width?: number;
+  nowrap?: boolean;
+}) => (
   <h2
     style={{
       fontFamily: "var(--osd-font-display)",
@@ -153,6 +161,7 @@ const PageTitle = ({ children, width = 1180 }: { children: ReactNode; width?: nu
       maxWidth: width,
       margin: 0,
       letterSpacing: 0,
+      whiteSpace: nowrap ? "nowrap" : undefined,
     }}
   >
     {children}
@@ -780,8 +789,10 @@ const UseCasesAndAudience: Page = () => (
   <Canvas>
     <main style={{ position: "relative", padding: "104px 120px 0" }}>
       <Eyebrow>使用情境與 TA</Eyebrow>
-      <PageTitle width={1260}>同一個工作台，服務兩種高頻決策需求。</PageTitle>
-      <BodyText width={1120}>
+      <PageTitle width={1680} nowrap>
+        一個平台，服務兩種不同方向的決策需求
+      </PageTitle>
+      <BodyText width={1680}>
         產品核心不是單一交易功能，而是把「大量交易的執行效率」與「專業投資的標的發現」放在同一個決策流程。
       </BodyText>
 
@@ -831,6 +842,7 @@ const UseCasesAndAudience: Page = () => (
           <div style={{ display: "flex", gap: 12, marginTop: 34, flexWrap: "wrap" }}>
             <Pill color={palette.emerald}>AI 智能標的</Pill>
             <Pill color={palette.amber}>研究驅動</Pill>
+            <Pill color={palette.accent}>投資決策</Pill>
           </div>
         </div>
       </div>
