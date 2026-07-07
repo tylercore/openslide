@@ -752,7 +752,7 @@ const ResearchDatabase: Page = () => (
 );
 
 const ResearchVideoPage: Page = () => (
-  <Canvas variant="ink">
+  <Canvas>
     <div style={{ position: 'absolute', left: 92, right: 92, top: 76, bottom: 102 }}>
       <div
         style={{
@@ -760,8 +760,8 @@ const ResearchVideoPage: Page = () => (
           height: '100%',
           borderRadius: 'var(--osd-radius)',
           overflow: 'hidden',
-          border: '1px solid rgba(248,244,234,0.2)',
-          boxShadow: '0 34px 120px rgba(0,0,0,0.34)',
+          border: `1px solid ${palette.line}`,
+          boxShadow: '0 30px 100px rgba(38,50,56,0.18)',
           background: '#101418',
         }}
       >
@@ -775,9 +775,9 @@ const ResearchVideoPage: Page = () => (
         top: 112,
         padding: '18px 24px',
         borderRadius: 'var(--osd-radius)',
-        background: 'rgba(22,32,36,0.82)',
-        border: '1px solid rgba(248,244,234,0.16)',
-        color: '#f8f4ea',
+        background: palette.soft,
+        border: `1px solid ${palette.line}`,
+        color: palette.text,
         fontSize: 26,
         fontWeight: 850,
       }}
