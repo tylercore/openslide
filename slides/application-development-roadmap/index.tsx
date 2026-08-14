@@ -1118,6 +1118,31 @@ const TravisReveal: Page = () => (
         <Pill dark>SERVER 回測</Pill>
         <Pill dark>可解釋建議</Pill>
       </div>
+      <a
+        href="https://travis-ai-kappa.vercel.app/"
+        target="_blank"
+        rel="noreferrer"
+        onClick={(event) => event.stopPropagation()}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 18,
+          marginTop: 36,
+          padding: "17px 26px",
+          borderRadius: 999,
+          border: `1px solid ${c.copper}`,
+          background: "rgba(206,138,75,.13)",
+          color: c.cream,
+          textDecoration: "none",
+          fontSize: 24,
+          fontWeight: 900,
+          letterSpacing: ".08em",
+          boxShadow: "0 16px 38px rgba(0,0,0,.22)",
+        }}
+      >
+        <span style={{ color: c.copper }}>LIVE DEMO</span>
+        <span>travis-ai-kappa.vercel.app ↗</span>
+      </a>
     </div>
   </Canvas>
 );
@@ -1457,31 +1482,31 @@ const Roadmap30: Page = () => (
         </div>
       </div>
       <div>
-        <PageTitle width={1040}>把可操作 demo，變成可驗證閉環。</PageTitle>
+        <PageTitle width={1040}>四條產品線，同步向前。</PageTitle>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 48 }}>
           <Card
-            label="TRAVIS"
-            title="穩定主流程"
-            text="對話、server 回測與結果解釋打通。"
+            label="金融晨報"
+            title="完整交付"
+            text="完成內容、流程與每日交付體驗。"
+            accent={c.gold}
+          />
+          <Card
+            label="TRAVIS AI"
+            title="啟動新專案"
+            text="建立正式專案節奏與開發基線。"
             accent={c.copper}
           />
           <Card
-            label="MEASURE"
-            title="建立量測"
-            text="定義完成復盤、回測與回訪事件。"
+            label="AI股票交易機器人"
+            title="持續進行"
+            text="依既定方向推進交易相關開發。"
             accent={c.green}
           />
           <Card
-            label="USERS"
-            title="準備封測"
-            text="建立既有用戶名單與訪談節奏。"
-            accent={c.navy}
-          />
-          <Card
             label="金融DB"
-            title="穩定維運"
-            text="守住供應品質，新增需求採必要優先。"
-            accent={c.gold}
+            title="測試中"
+            text="驗證資料品質、服務介面與穩定度。"
+            accent={c.navy}
           />
         </div>
       </div>
@@ -1520,27 +1545,31 @@ const Roadmap90: Page = () => (
         </div>
       </div>
       <div>
-        <PageTitle width={1040}>用封閉 Beta，驗證持續復盤。</PageTitle>
+        <PageTitle width={1040}>兩項產品落地，金融DB擴充。</PageTitle>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 48 }}>
-          <Card label="BETA" title="真實使用" text="讓既有用戶完成多輪交易復盤。" accent={c.gold} />
           <Card
-            label="RELIABILITY"
-            title="回測可重現"
-            text="保存參數、版本、來源與結果。"
+            compact
+            label="TRAVIS AI"
+            title="第一版落地"
+            text="完成可持續使用的交易復盤服務。"
+            accent={c.copper}
+          />
+          <Card
+            compact
+            label="AI股票交易機器人"
+            title="交易落地"
+            text="讓交易流程正式進入實際使用。"
             accent={c.green}
           />
-          <Card
-            label="QUALITY"
-            title="建議可解釋"
-            text="從結論回到證據與決策條件。"
-            accent={c.navy}
-          />
-          <Card
-            label="PORTFOLIO"
-            title="三案照常"
-            text="AI股票交易機器人、金融晨報持續交付。"
-            accent={c.orange}
-          />
+          <div style={{ gridColumn: "1 / -1" }}>
+            <Card
+              compact
+              label="金融DB"
+              title="基礎建設擴充"
+              text="擴大資料覆蓋與共用服務能力。"
+              accent={c.navy}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -1578,27 +1607,48 @@ const Roadmap365: Page = () => (
         </div>
       </div>
       <div>
-        <PageTitle width={1080}>形成資料、洞察、交易、復盤的四產品版圖。</PageTitle>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 48 }}>
-          <Card label="01 / DATA" title="金融DB" text="持續供應可信市場資料。" accent={c.navy} />
+        <PageTitle width={1080}>所有產品進入市場，轉入長期經營。</PageTitle>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 40 }}>
           <Card
+            compact
+            label="01 / DATA"
+            title="金融DB"
+            text="穩定維護與持續擴充。"
+            accent={c.navy}
+          />
+          <Card
+            compact
             label="02 / CONTEXT"
             title="金融晨報"
-            text="每天建立市場判讀起點。"
+            text="穩定交付晨報。"
             accent={c.gold}
           />
           <Card
+            compact
             label="03 / ACTION"
             title="AI股票交易機器人"
-            text="推進策略、交易與監控。"
+            text="進入市場並持續更新。"
             accent={c.green}
           />
           <Card
+            compact
             label="04 / LEARNING"
             title="Travis AI"
-            text="讓每次交易回到可驗證學習。"
+            text="進入市場並深化體驗。"
             accent={c.copper}
           />
+        </div>
+        <div
+          style={{
+            marginTop: 24,
+            borderLeft: `8px solid ${c.green}`,
+            background: c.greenSoft,
+            padding: "22px 30px",
+            fontSize: 29,
+            fontWeight: 900,
+          }}
+        >
+          落實長期穩定維護，並持續進行功能更新。
         </div>
       </div>
     </div>
