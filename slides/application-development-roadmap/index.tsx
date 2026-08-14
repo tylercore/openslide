@@ -632,7 +632,9 @@ const InfraModule = ({
     }}
   >
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-      <span style={{ color: accent, fontSize: 19, fontWeight: 900, letterSpacing: ".12em" }}>{code}</span>
+      <span style={{ color: accent, fontSize: 19, fontWeight: 900, letterSpacing: ".12em" }}>
+        {code}
+      </span>
       <div style={{ display: "flex", gap: 5 }}>
         <span style={{ width: 6, height: 6, borderRadius: 99, background: accent }} />
         <span style={{ width: 6, height: 6, borderRadius: 99, background: c.darkLine }} />
@@ -653,14 +655,14 @@ const CurrentArchitecture: Page = () => (
         <Card
           compact
           label="PRODUCT 01"
-          title="AI-stock"
+          title="AI股票交易機器人"
           text="AI 分析、策略判斷、交易執行與監控。"
           accent={c.green}
         />
         <Card
           compact
           label="PRODUCT 02"
-          title="Daily-insights"
+          title="金融晨報"
           text="盤前新聞、重要指標與當日趨勢。"
           accent={c.gold}
         />
@@ -674,11 +676,51 @@ const CurrentArchitecture: Page = () => (
         />
       </div>
       <div style={{ height: 34, position: "relative" }}>
-        <div style={{ position: "absolute", left: "16.67%", top: 0, bottom: 16, borderLeft: `2px solid ${c.line}` }} />
-        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 16, borderLeft: `2px solid ${c.line}` }} />
-        <div style={{ position: "absolute", left: "83.33%", top: 0, bottom: 16, borderLeft: `2px solid ${c.line}` }} />
-        <div style={{ position: "absolute", left: "16.67%", right: "16.67%", bottom: 16, borderTop: `2px solid ${c.line}` }} />
-        <div style={{ position: "absolute", left: "50%", bottom: 0, height: 16, borderLeft: `2px solid ${c.green}` }} />
+        <div
+          style={{
+            position: "absolute",
+            left: "16.67%",
+            top: 0,
+            bottom: 16,
+            borderLeft: `2px solid ${c.line}`,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: 0,
+            bottom: 16,
+            borderLeft: `2px solid ${c.line}`,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "83.33%",
+            top: 0,
+            bottom: 16,
+            borderLeft: `2px solid ${c.line}`,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "16.67%",
+            right: "16.67%",
+            bottom: 16,
+            borderTop: `2px solid ${c.line}`,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            bottom: 0,
+            height: 16,
+            borderLeft: `2px solid ${c.green}`,
+          }}
+        />
       </div>
       <div
         style={{
@@ -692,26 +734,54 @@ const CurrentArchitecture: Page = () => (
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 22 }}>
-            <div style={{ fontSize: 47, fontWeight: 950 }}>FInDB</div>
+            <div style={{ fontSize: 47, fontWeight: 950 }}>金融DB</div>
             <div style={{ fontSize: 21, letterSpacing: ".14em", fontWeight: 900, color: c.copper }}>
-              SHARED INFRASTRUCTURE
+              共享資料層
             </div>
           </div>
           <div style={{ display: "flex", gap: 10 }}>
-            <Pill dark active>MARKET DATA</Pill>
+            <Pill dark active>
+              MARKET DATA
+            </Pill>
             <Pill dark>RESEARCH</Pill>
             <Pill dark>PLATFORM API</Pill>
           </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginTop: 22 }}>
+        <div
+          style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginTop: 22 }}
+        >
           <InfraModule code="INGEST" title="資料接入" text="市場行情與研究來源" accent={c.navy} />
-          <InfraModule code="GOVERN" title="治理標準化" text="驗證、清洗與代碼對齊" accent={c.green} />
+          <InfraModule
+            code="GOVERN"
+            title="治理標準化"
+            text="驗證、清洗與代碼對齊"
+            accent={c.green}
+          />
           <InfraModule code="SERVE" title="服務介面" text="查詢、API 與資料供應" accent={c.gold} />
-          <InfraModule code="OPERATE" title="維運監控" text="品質、告警與可觀測性" accent={c.copper} />
+          <InfraModule
+            code="OPERATE"
+            title="維運監控"
+            text="品質、告警與可觀測性"
+            accent={c.copper}
+          />
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 18 }}>
-          <div style={{ width: 12, height: 12, borderRadius: 99, background: c.green, boxShadow: `0 0 16px ${c.green}` }} />
-          <div style={{ height: 2, flex: 1, background: "linear-gradient(90deg, #294d68, #0f766e, #b7791f, #ce8a4b)" }} />
+          <div
+            style={{
+              width: 12,
+              height: 12,
+              borderRadius: 99,
+              background: c.green,
+              boxShadow: `0 0 16px ${c.green}`,
+            }}
+          />
+          <div
+            style={{
+              height: 2,
+              flex: 1,
+              background: "linear-gradient(90deg, #294d68, #0f766e, #b7791f, #ce8a4b)",
+            }}
+          />
           <div style={{ color: "#b8c1bc", fontSize: 21, fontWeight: 800, letterSpacing: ".08em" }}>
             共用資料與研究服務匯流排
           </div>
