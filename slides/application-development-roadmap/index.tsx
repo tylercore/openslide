@@ -1743,5 +1743,4 @@ export default [
   Roadmap30,
   Roadmap90,
   Roadmap365,
-  Close,
 ] satisfies Page[];
