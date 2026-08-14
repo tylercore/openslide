@@ -603,7 +603,7 @@ const Decision: Page = () => (
             color: "#c4cbc7",
           }}
         >
-          FInDB 新需求趨緩，釋出的工程容量改投向交易復盤。
+          金融DB 新需求趨緩，釋出的工程容量改投向交易復盤。
         </div>
       </div>
     </div>
@@ -793,9 +793,9 @@ const CurrentArchitecture: Page = () => (
 
 const Findb: Page = () => (
   <PageFrame>
-    <Eyebrow>PROJECT / FINDB</Eyebrow>
+    <Eyebrow>PROJECT / 金融DB</Eyebrow>
     <PageTitle>把市場資料，變成可被信任的供應鏈。</PageTitle>
-    <Lead>FInDB 不直接面向終端使用者；它決定所有產品能否拿到一致、可追溯、可擴充的市場語境。</Lead>
+    <Lead>金融DB 不直接面向終端使用者；它決定所有產品能否拿到一致、可追溯、可擴充的市場語境。</Lead>
     <div style={{ display: "flex", alignItems: "flex-start", gap: 22, marginTop: 66 }}>
       <FlowNode number="01" title="收集" text="串接市場原始資料與研究來源。" accent={c.navy} />
       <Arrow />
@@ -822,7 +822,7 @@ const Findb: Page = () => (
 
 const AiStock: Page = () => (
   <PageFrame>
-    <Eyebrow>PROJECT / AI-STOCK</Eyebrow>
+    <Eyebrow>PROJECT / AI股票交易機器人</Eyebrow>
     <PageTitle>讓 AI 分析走完整條交易工作流。</PageTitle>
     <Lead>從全市場發現候選標的，到策略、執行、監控與通知，判斷不再停在報告裡。</Lead>
     <div style={{ display: "flex", alignItems: "stretch", gap: 18, marginTop: 66 }}>
@@ -854,7 +854,7 @@ const AiStock: Page = () => (
 
 const DailyInsights: Page = () => (
   <PageFrame>
-    <Eyebrow>PROJECT / DAILY-INSIGHTS</Eyebrow>
+    <Eyebrow>PROJECT / 金融晨報</Eyebrow>
     <div
       style={{
         display: "grid",
@@ -917,9 +917,9 @@ const PortfolioStatus: Page = () => (
             borderRadius: 18,
           }}
         >
-          <strong style={{ fontSize: 34 }}>FInDB</strong>
+          <strong style={{ fontSize: 34 }}>金融DB</strong>
           <span style={{ fontSize: 28, color: c.muted }}>需求趨緩，轉入品質與維運節奏</span>
-          <Pill active>容量釋出</Pill>
+          <Pill active>工作量趨緩</Pill>
         </div>
         <div
           style={{
@@ -932,7 +932,7 @@ const PortfolioStatus: Page = () => (
             borderRadius: 18,
           }}
         >
-          <strong style={{ fontSize: 34 }}>AI-stock</strong>
+          <strong style={{ fontSize: 34 }}>AI股票交易機器人</strong>
           <span style={{ fontSize: 28, color: c.muted }}>完整交易工作流持續推進</span>
           <Pill>進度不變</Pill>
         </div>
@@ -947,7 +947,7 @@ const PortfolioStatus: Page = () => (
             borderRadius: 18,
           }}
         >
-          <strong style={{ fontSize: 34 }}>Daily-insights</strong>
+          <strong style={{ fontSize: 34 }}>金融晨報</strong>
           <span style={{ fontSize: 28, color: c.muted }}>維持每日交付與品質</span>
           <Pill>進度不變</Pill>
         </div>
@@ -959,7 +959,7 @@ const PortfolioStatus: Page = () => (
         <div style={{ fontSize: 112, lineHeight: 1, fontWeight: 950, marginTop: 28 }}>1</div>
         <div style={{ fontSize: 34, fontWeight: 900, marginTop: 14 }}>名工程師主責新案</div>
         <div style={{ fontSize: 27, lineHeight: 1.5, marginTop: 22, opacity: 0.78 }}>
-          同時保留 FInDB 必要維運責任。
+          同時保留金融DB必要維運責任。
         </div>
       </div>
     </div>
@@ -969,16 +969,21 @@ const PortfolioStatus: Page = () => (
 const MissingLoop: Page = () => (
   <PageFrame>
     <Eyebrow>WHY NOW</Eyebrow>
-    <PageTitle>我們完成了交易，卻還沒完成學習。</PageTitle>
+    <PageTitle>我們完成了交易，卻還沒完善可循環流程。</PageTitle>
     <Lead>資料、洞察與執行已串起來；真正缺少的是交易之後，把經驗轉回下一次決策。</Lead>
     <Steps>
       <Step>
         <div style={{ display: "flex", alignItems: "center", gap: 20, marginTop: 70 }}>
-          <FlowNode number="01" title="資料" text="FInDB 提供可信市場語境。" accent={c.navy} />
+          <FlowNode number="01" title="資料" text="金融DB提供可信市場語境。" accent={c.navy} />
           <Arrow />
-          <FlowNode number="02" title="洞察" text="Daily-insights 建立今日方向。" accent={c.gold} />
+          <FlowNode number="02" title="洞察" text="金融晨報建立今日方向。" accent={c.gold} />
           <Arrow />
-          <FlowNode number="03" title="交易" text="AI-stock 推進策略與執行。" accent={c.green} />
+          <FlowNode
+            number="03"
+            title="交易"
+            text="AI股票交易機器人推進策略與執行。"
+            accent={c.green}
+          />
         </div>
       </Step>
       <Step>
@@ -995,7 +1000,7 @@ const MissingLoop: Page = () => (
           }}
         >
           <div style={{ fontSize: 34, fontWeight: 900 }}>
-            成交之後：為什麼贏？為什麼輸？下一次要改什麼？
+            成交之後：為什麼贏？為什麼輸？哪些要保留？哪些要淘汰？
           </div>
           <div style={{ fontSize: 64, color: c.red, fontWeight: 950 }}>?</div>
         </div>
@@ -1005,18 +1010,20 @@ const MissingLoop: Page = () => (
 );
 
 const TargetAudience: Page = () => (
-  <PageFrame>
-    <Eyebrow>TARGET AUDIENCE</Eyebrow>
-    <PageTitle>第一個服務對象：主動型個人交易者。</PageTitle>
+  <PageFrame dark>
+    <Eyebrow dark>TARGET AUDIENCE</Eyebrow>
+    <PageTitle dark>TA：主動型交易者。</PageTitle>
     <div style={{ display: "grid", gridTemplateColumns: ".72fr 1.28fr", gap: 58, marginTop: 56 }}>
       <div
         style={{
-          background: c.ink,
+          background: "rgba(26,32,30,.94)",
+          border: `1px solid ${c.darkLine}`,
           borderRadius: 26,
-          color: c.paper,
+          color: c.cream,
           padding: "42px 42px",
           minHeight: 500,
           boxSizing: "border-box",
+          boxShadow: "0 22px 58px rgba(0,0,0,.24)",
         }}
       >
         <div
@@ -1026,8 +1033,9 @@ const TargetAudience: Page = () => (
             borderRadius: "50%",
             display: "grid",
             placeItems: "center",
-            background: c.goldSoft,
-            color: c.gold,
+            background: "rgba(206,138,75,.16)",
+            border: `1px solid ${c.copper}`,
+            color: c.copper,
             fontSize: 52,
             fontWeight: 950,
           }}
@@ -1045,21 +1053,24 @@ const TargetAudience: Page = () => (
           label="FRICTION 01"
           title="紀錄散落"
           text="交易、筆記、新聞與策略無法對齊。"
-          accent={c.navy}
+          accent={c.copper}
+          dark
         />
         <Card
           compact
           label="FRICTION 02"
           title="偏誤難見"
           text="靠印象解釋結果，容易重複同樣錯誤。"
-          accent={c.red}
+          accent={c.cream}
+          dark
         />
         <Card
           compact
           label="FRICTION 03"
           title="無法重現"
           text="缺少回測與來源證據，改善難以驗證。"
-          accent={c.gold}
+          accent={c.copper}
+          dark
         />
       </div>
     </div>
@@ -1331,7 +1342,7 @@ const ProductArchitecture: Page = () => (
       <div style={{ display: "grid", gap: 18 }}>
         <Card
           label="DATA LAYER"
-          title="FInDB"
+          title="金融DB"
           text="提供市場資料、歷史資料與研究語境。"
           accent={c.green}
         />
@@ -1467,7 +1478,7 @@ const Roadmap30: Page = () => (
             accent={c.navy}
           />
           <Card
-            label="FINDB"
+            label="金融DB"
             title="穩定維運"
             text="守住供應品質，新增需求採必要優先。"
             accent={c.gold}
@@ -1527,7 +1538,7 @@ const Roadmap90: Page = () => (
           <Card
             label="PORTFOLIO"
             title="三案照常"
-            text="AI-stock、Daily-insights 持續交付。"
+            text="AI股票交易機器人、金融晨報持續交付。"
             accent={c.orange}
           />
         </div>
@@ -1569,16 +1580,16 @@ const Roadmap365: Page = () => (
       <div>
         <PageTitle width={1080}>形成資料、洞察、交易、復盤的四產品版圖。</PageTitle>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 48 }}>
-          <Card label="01 / DATA" title="FInDB" text="持續供應可信市場資料。" accent={c.navy} />
+          <Card label="01 / DATA" title="金融DB" text="持續供應可信市場資料。" accent={c.navy} />
           <Card
             label="02 / CONTEXT"
-            title="Daily-insights"
+            title="金融晨報"
             text="每天建立市場判讀起點。"
             accent={c.gold}
           />
           <Card
             label="03 / ACTION"
-            title="AI-stock"
+            title="AI股票交易機器人"
             text="推進策略、交易與監控。"
             accent={c.green}
           />
@@ -1670,15 +1681,12 @@ export const meta: SlideMeta = {
 export default [
   Cover,
   CurrentArchitecture,
-  Findb,
-  AiStock,
-  DailyInsights,
   PortfolioStatus,
   MissingLoop,
-  TargetAudience,
   TravisReveal,
   DemoFlow,
   DemoConcept,
+  TargetAudience,
   Decision,
   ProductArchitecture,
   GoToMarket,
