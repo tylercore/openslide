@@ -1655,6 +1655,148 @@ const Roadmap365: Page = () => (
   </PageFrame>
 );
 
+const MonthCell = ({ month, milestone }: { month: string; milestone?: string }) => (
+  <div
+    style={{
+      minHeight: 58,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      borderLeft: `1px solid ${c.line}`,
+      color: milestone ? c.green : c.muted,
+      background: milestone ? "rgba(15,118,110,.07)" : "transparent",
+    }}
+  >
+    <div style={{ fontSize: 18, fontWeight: 900, whiteSpace: "nowrap" }}>{month}</div>
+    <div style={{ minHeight: 18, marginTop: 3, fontSize: 15, fontWeight: 900, letterSpacing: ".08em" }}>
+      {milestone ?? ""}
+    </div>
+  </div>
+);
+
+const GanttBar = ({
+  start,
+  span,
+  label,
+  color,
+  soft = false,
+}: {
+  start: number;
+  span: number;
+  label: string;
+  color: string;
+  soft?: boolean;
+}) => (
+  <div
+    style={{
+      gridColumn: `${start} / span ${span}`,
+      alignSelf: "center",
+      minWidth: 0,
+      height: 48,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "0 12px",
+      borderRadius: 10,
+      border: `1px solid ${color}`,
+      background: soft ? `${color}22` : color,
+      color: soft ? color : c.paper,
+      boxSizing: "border-box",
+      fontSize: 20,
+      fontWeight: 900,
+      whiteSpace: "nowrap",
+      boxShadow: soft ? "none" : "0 10px 24px rgba(24,32,38,.12)",
+    }}
+  >
+    {label}
+  </div>
+);
+
+const GanttRow = ({
+  title,
+  subtitle,
+  accent,
+  children,
+}: {
+  title: string;
+  subtitle: string;
+  accent: string;
+  children: ReactNode;
+}) => (
+  <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", minHeight: 102, borderTop: `1px solid ${c.line}` }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 18, paddingRight: 28 }}>
+      <div style={{ width: 10, height: 58, borderRadius: 99, background: accent }} />
+      <div>
+        <div style={{ fontSize: 28, fontWeight: 950, color: c.ink }}>{title}</div>
+        <div style={{ fontSize: 19, color: c.muted, marginTop: 6 }}>{subtitle}</div>
+      </div>
+    </div>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(12, 1fr)",
+        gap: 7,
+        padding: "0 7px",
+        backgroundImage: `linear-gradient(90deg, ${c.line} 1px, transparent 1px)`,
+        backgroundSize: "calc(100% / 12) 100%",
+      }}
+    >
+      {children}
+    </div>
+  </div>
+);
+
+const GanttYear: Page = () => (
+  <PageFrame>
+    <Eyebrow>12-MONTH GANTT / EXECUTION</Eyebrow>
+    <PageTitle>未來一年，以月份推進產品落地。</PageTitle>
+    <div style={{ marginTop: 38, border: `1px solid ${c.line}`, borderRadius: 20, background: "rgba(255,250,240,.72)", padding: "0 24px 20px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", alignItems: "stretch" }}>
+        <div style={{ display: "flex", alignItems: "center", fontSize: 19, fontWeight: 900, letterSpacing: ".12em", color: c.muted }}>
+          PRODUCT / MONTH
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)" }}>
+          <MonthCell month="2026/08" milestone="30D" />
+          <MonthCell month="2026/09" />
+          <MonthCell month="2026/10" milestone="90D" />
+          <MonthCell month="2026/11" />
+          <MonthCell month="2026/12" />
+          <MonthCell month="2027/01" />
+          <MonthCell month="2027/02" />
+          <MonthCell month="2027/03" />
+          <MonthCell month="2027/04" />
+          <MonthCell month="2027/05" />
+          <MonthCell month="2027/06" />
+          <MonthCell month="2027/07" milestone="365D" />
+        </div>
+      </div>
+      <GanttRow title="金融晨報" subtitle="交付 → 穩定經營" accent={c.gold}>
+        <GanttBar start={1} span={1} label="交付" color={c.gold} />
+        <GanttBar start={2} span={11} label="穩定運行／功能更新" color={c.gold} soft />
+      </GanttRow>
+      <GanttRow title="Travis AI" subtitle="啟動 → 落地 → 市場" accent={c.copper}>
+        <GanttBar start={1} span={2} label="啟動" color={c.copper} />
+        <GanttBar start={3} span={2} label="落地" color={c.copper} soft />
+        <GanttBar start={5} span={8} label="市場推進／體驗迭代" color={c.copper} soft />
+      </GanttRow>
+      <GanttRow title="AI股票交易機器人" subtitle="開發 → 落地 → 更新" accent={c.green}>
+        <GanttBar start={1} span={3} label="持續開發" color={c.green} />
+        <GanttBar start={4} span={9} label="市場運行／功能更新" color={c.green} soft />
+      </GanttRow>
+      <GanttRow title="金融DB" subtitle="測試 → 擴充 → 維運" accent={c.navy}>
+        <GanttBar start={1} span={2} label="測試" color={c.navy} />
+        <GanttBar start={3} span={4} label="擴充" color={c.navy} soft />
+        <GanttBar start={7} span={6} label="穩定維運" color={c.navy} soft />
+      </GanttRow>
+    </div>
+    <div style={{ marginTop: 20, display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 21, color: c.muted }}>
+      <span>時間範圍：2026/08–2027/07</span>
+      <span style={{ fontWeight: 900, color: c.green }}>交付 → 落地 → 進入市場 → 穩定維護</span>
+    </div>
+  </PageFrame>
+);
+
 const Metric = ({
   label,
   title,
@@ -1743,4 +1885,5 @@ export default [
   Roadmap30,
   Roadmap90,
   Roadmap365,
+  GanttYear,
 ] satisfies Page[];
